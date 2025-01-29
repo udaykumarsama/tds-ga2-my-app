@@ -23,6 +23,6 @@ async def get_marks(name: list[str] = Query(None)):
     - `/api?name=ho8ePmxFs&name=Zfmi` -> {"marks": [70, 55]}
     """
     if name:
-        marks = [s["marks"] for s in students_data if s["name"] in name]
+        marks = [next((s["marks"] for s in students_data if s["name"] == n), None) for n in name]
         return {"marks": marks}
     return {"marks": []}
